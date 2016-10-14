@@ -1,4 +1,4 @@
-package com.s126.service;
+package com.s126.demo.service;
 
 public class EmpService {
 

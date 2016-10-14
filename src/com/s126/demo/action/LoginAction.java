@@ -1,11 +1,11 @@
-package com.s126.action;
+package com.s126.demo.action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.s126.bean.Account;
-import com.s126.dao.LoginDao;
+import com.s126.demo.bean.Account;
+import com.s126.demo.dao.LoginDao;
 
 public class LoginAction  extends ActionSupport{
-	
 	
 	private String name;
 	private String pwd;
@@ -14,14 +14,21 @@ public class LoginAction  extends ActionSupport{
 	private LoginDao loginDao = new LoginDao();
 	
 	
+	/* 登录功能 */
 	public String login ()  {
 		acc = loginDao.checkLogin(name, pwd);
+		if(acc == null) {
+			return "fail";
+		}
+		ActionContext.getContext().getSession().put("account", acc);
 		return SUCCESS;
+		
 	}
 	
+	/* 注册功能 */
 	public String register () {
-		// Ƿȱҵ���߼�
-		loginDao.addAccount(acc);
+		if(!loginDao.addAccount(acc))
+			return "fails";
 		return SUCCESS;
 	}
 
@@ -51,6 +58,4 @@ public class LoginAction  extends ActionSupport{
 	public void setAcc(Account acc) {
 		this.acc = acc;
 	}
-	
-
 }

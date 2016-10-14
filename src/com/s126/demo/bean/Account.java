@@ -1,4 +1,4 @@
-package com.s126.bean;
+package com.s126.demo.bean;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ public class Account {
 	
 	private String username;
 	private String password;
-	private int acctype;         // 1, Ñ§ÉúÕËºÅ£» 2, ½ÌÊ¦ÕËºÅ£» 3, Ğ£³¤ÕËºÅ.
-	private Date lastLogin;   // ÉÏ´ÎµÄµÇÂ½Ê±¼ä¡£
+	private int acctype;         // 1, å­¦ç”Ÿï¼›  2, è€å¸ˆï¼› 3, æ ¡é•¿
+	private Date lastLogin;      // ä¸Šæ¬¡ç™»å½•æ—¶é—´
 	
 	
 	public String getUsername() {

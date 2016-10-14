@@ -5,60 +5,83 @@
 
 <struts>
 
-    <constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.action.extension" value="html,," />
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
 
 	<!-- 第一个模块，登陆注册 -->
 	<package name="login" namespace="/login" extends="struts-default">
+		<!-- 注册拦截器 -->
+		<interceptors>
+			<interceptor name="isLogin"
+				class="com.s126.demo.interceptor.ListAllInterceptor"></interceptor>
+		</interceptors>
+
 		<global-results>
 			<result name="error">/WEB-INF/jsp/login/error.jsp</result>
 		</global-results>
-	
+
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
-	
+
 		<!-- 显示登录的主页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/login.action -->
 		<action name="login">
 			<result>/WEB-INF/jsp/login/login.jsp</result>
 		</action>
-		
+
 		<!-- 完成登录相关的操作 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/loginSubmit.action -->
-		<action name="loginSubmit" class="com.s126.action.LoginAction" method="login">
-			<result>/WEB-INF/jsp/login/welcome.jsp</result>
-			<result name="fail">/WEB-INF/jsp/login/fail.jsp</result>
+		<action name="loginSubmit" class="com.s126.demo.action.LoginAction"
+			method="login">
+			<!-- 类型，重定向和转发 -->
+			<result name="success" type="redirect">/emp/listAll.html</result>
+			<result type="redirect" name="fail">/WEB-INF/jsp/login/fail.jsp</result>
 			<result name="error">/WEB-INF/jsp/login/fail.jsp</result>
 		</action>
-		
+
 		<!-- 显示注册的页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/register.action -->
 		<action name="register">
 			<result>/WEB-INF/jsp/login/register.jsp</result>
 		</action>
-		
+
 		<!-- 完成注册相关的操作 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/registerSubmit.action -->
-		<action name="registerSubmit" class="com.s126.action.LoginAction" method="register">
-			<result >/WEB-INF/jsp/login/welcome.jsp</result>
+		<action name="registerSubmit" class="com.s126.demo.action.LoginAction"
+			method="register">
+			<result>/WEB-INF/jsp/login/welcome.jsp</result>
 			<result name="fails">/WEB-INF/jsp/login/fail.jsp</result>
 		</action>
-		
+
 	</package>
-	
-	
-	
-	<!-- 第二个模块，雇员管理 -->
-    <package name="emp" namespace="/emp" extends="struts-default">
-    	<action name="emp_*" class="com.s126.action.EmpAction" method="{1}">
-    		<result name="update">/WEB-INF/jsp/emp/update.jsp</result>
-    		<result name="add">/WEB-INF/jsp/emp/add.jsp</result>
-    		<result name="listAll">/WEB-INF/jsp/emp/listAll.jsp</result>
-    		<result name="delete">/WEB-INF/jsp/emp/delete.jsp</result>
-    	</action>
-    </package>
+
+
+
+	<!-- 第二个模块，员工管理 -->
+	<package name="emp" namespace="/emp" extends="login">
+		<action name="*" class="com.s126.demo.action.EmpAction" method="{1}">
+
+			<!-- 引用拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="isLogin"></interceptor-ref>
+
+			<result name="update">/WEB-INF/jsp/emp/update.jsp</result>
+			<result name="add">/WEB-INF/jsp/emp/add.jsp</result>
+			<result name="listAll">/WEB-INF/jsp/emp/listAll.jsp</result>
+			<result name="delete">/WEB-INF/jsp/emp/delete.jsp</result>
+		</action>
+	</package>
+
+
+
+
+	<!-- 第三个模块，商品管理 -->
+	<package name="product" namespace="/product">
+		<!-- 大家自行实现 -->
+	</package>
+
 
 </struts>

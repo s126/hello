@@ -1,17 +1,17 @@
-package com.s126.dao;
+package com.s126.demo.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.s126.bean.Account;
-import com.s126.util.DBUtil;
+import com.s126.demo.bean.Account;
+import com.s126.demo.util.DBUtil;
 
 public class LoginDao {
 
 	/**
-	 * ¼ì²éÓÃ»§ÊÇ·ñ´æÔÚ¡£Èç¹û´æÔÚµÄ»°£¬·µ»Ø  Account ĞÅÏ¢£¬·ñÔò£¬·µ»Ø null¡£
+	 * é€šè¿‡è´¦å·ã€å¯†ç æŸ¥è¯¢è´¦å·ï¼Œè¿”å› accountï¼ŒæŸ¥ä¸åˆ°è¿”å› null.
 	 */
 	public Account checkLogin(String name, String pwd) {
 		Connection conn = DBUtil.getCon();
@@ -40,7 +40,7 @@ public class LoginDao {
 	
 	
 	/**
-	 * 
+	 * å¢åŠ ä¸€ä¸ªæ–°çš„è´¦å·.
 	 */
 	public boolean addAccount (Account account) {
 		Connection conn = DBUtil.getCon();
@@ -49,18 +49,16 @@ public class LoginDao {
 		ResultSet rs = null;
 		
 		try {
+			// äº‹åŠ¡å¤„ç†
 			conn.setAutoCommit(false);
-			// µÚÒ»‚€²åÈë²Ù×÷
-			
-			// µÚ¶ş‚€²åÈë²Ù×÷
-			
-			// µÚÈı‚€¸üĞÂ²Ù×÷
+
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, account.getUsername());
 			ps.setString(2, account.getPassword());
 			ps.setInt(3, account.getAcctype() == 0 ? 1 : account.getAcctype());
 			
 			ps.execute();
+			
 			conn.commit();
 			
 			return true;

@@ -1,4 +1,4 @@
-package com.s126.util;
+package com.s126.demo.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,7 +11,7 @@ import java.util.Properties;
 
 
 /**
- * »ñÈ¡¡¢¹Ø±ÕÊý¾Ý¿âÁ¬½Ó
+ * ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author Administrator
  *
  */
@@ -26,6 +26,7 @@ public class DBUtil {
 	static {
 		try {
 			
+			// ï¿½ï¿½ classpath ï¿½Ð¼ï¿½ï¿½ï¿½ db.properties ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¶ï¿½ï¿½È¡ï¿½ï¿½Øµï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½
 			Properties prop = new Properties();
 			InputStream in = DBUtil.class.getClassLoader().getResourceAsStream("db.properties");
 			prop.load(in);
@@ -35,6 +36,7 @@ public class DBUtil {
 			password = prop.getProperty("password");
 			
 			Class.forName(driver);
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

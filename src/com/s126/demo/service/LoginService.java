@@ -1,6 +1,6 @@
-package com.s126.service;
+package com.s126.demo.service;
 
-import com.s126.dao.LoginDao;
+import com.s126.demo.dao.LoginDao;
 
 public class LoginService {
 
@@ -9,5 +9,4 @@ public class LoginService {
 	public void login(String name, String pwd) {
 		loginDao.checkLogin(name, pwd);
 	}
-
 }
