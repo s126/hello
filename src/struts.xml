@@ -6,7 +6,7 @@
 <struts>
 
 	<constant name="struts.devMode" value="true" />
-	<constant name="struts.action.extension" value="html,," />
+	<constant name="struts.action.extension" value="action,html,," />
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
 
@@ -86,6 +86,22 @@
 	
 	<!-- 测试模块 -->
 	<package name="test" namespace="/test" extends="struts-default">
+		
+		<!-- 这是一个拦截器的测试请求 -->
+		<!-- 首先自定义两个拦截器 -->
+		<!-- 请大家自己调试下代码，了解下拦截器的大致流程。 -->
+		<interceptors>
+			<interceptor name="aaa" class="com.s126.demo.test.interceptor.AI"></interceptor>
+			<interceptor name="bbb" class="com.s126.demo.test.interceptor.BI"></interceptor>
+		</interceptors>
+		<action name="interceptor" class="com.s126.demo.test.TestAction" method="testInterceptor">
+			<!-- 这个请求使用下面两个定义的拦截器。可以执行看看输出顺序 -->
+			<interceptor-ref name="aaa" />
+			<interceptor-ref name="bbb" />
+			<result>/WEB-INF/jsp/login/error.jsp</result>
+		</action>
+
+
 		<!-- 这是一个测试 ognl的请求 -->
 		<action name="ognl" class="com.s126.demo.test.OgnlAction" method="testOGNL">
 			<result>/WEB-INF/jsp/test/ognl.jsp</result>

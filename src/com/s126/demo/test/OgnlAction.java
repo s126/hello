@@ -6,13 +6,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.RequestAware;
-import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.SessionAware;
-
 import ognl.Ognl;
 import ognl.OgnlException;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.s126.demo.bean.Computer;
