@@ -10,6 +10,6 @@ create table vip.account
 	status int default 1
 );
 
-insert into account values ('hello', 'man', 1, null, 1);
+insert into vip.account values ('hello', 'man', 1, null, 1);
 
 commit;

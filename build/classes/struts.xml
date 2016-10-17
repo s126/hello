@@ -82,6 +82,15 @@
 	<package name="product" namespace="/product">
 		<!-- 大家自行实现 -->
 	</package>
+	
+	
+	<!-- 测试模块 -->
+	<package name="test" namespace="/test" extends="struts-default">
+		<!-- 这是一个测试 ognl的请求 -->
+		<action name="ognl" class="com.s126.demo.test.OgnlAction" method="testOGNL">
+			<result>/WEB-INF/jsp/test/ognl.jsp</result>
+		</action>
+	</package>
 
 
 </struts>

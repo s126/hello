@@ -19,14 +19,16 @@
 		<td>工资</td>
 	</tr>
 	
-	<s:iterator var="l" value="emps">
+	<s:iterator var="j" value="emps">
 		<tr>
-			<td><s:property value="#l.name"/></td>
-			<td><s:property value="#l.job"/></td>
-			<td><s:property value="#l.sal"/></td>
-			<td><a href="delete.html?ename=${name}">删除</a></td> 
+			<td>${name}</td>
+			<td><s:property value="job"/></td>
+			<td><s:property value="#j.sal"/></td>
+			<td><a href="delete.html?ename=${name}">删除</a></td>
 		</tr>
 	</s:iterator>
+	
+	
 </table>
 
 </body>
