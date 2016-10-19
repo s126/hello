@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,14 +10,13 @@
 </head>
 <body>
 
-<div class="centerblock">
-	<form action="registerSubmit" method="post">
-		账   号    <input type="text" name="acc.username"><br>
-		密   码    <input type="password" name="acc.password"><br>
-		确认密码<input type="password" name="pwd">
-		
-		<input type="submit" value="注册">
-	</form>
-</div>
+	<div class="centerblock">
+		<s:form action="registerSubmit">
+			<s:textfield label="账号" name="acc.username" />
+			<s:textfield label="密码" name="acc.password" />
+			<s:textfield label="确认密码" name="pwd" />
+			<s:submit value="注册" />
+		</s:form>
+	</div>
 </body>
 </html>

@@ -11,17 +11,13 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
 
-
+ 
 	<!-- 第一个模块，登陆注册 -->
 	<package name="login" namespace="/login" extends="struts-default">
 
-		<!-- 注册拦截器 -->
-		<interceptors>
-			<interceptor name="isLogin" class="com.s126.demo.interceptor.ListAllInterceptor"></interceptor>
-		</interceptors>
-
 		<global-results>
 			<result name="error">/WEB-INF/jsp/login/error.jsp</result>
+			<result name="Nopower">/WEB-INF/jsp/login/Nopower.jsp</result>
 		</global-results>
 
 		<global-exception-mappings>
@@ -40,8 +36,9 @@
 			method="login">
 			<!-- 类型，重定向和转发 -->
 			<result name="success" type="redirect">/emp/listAll.html</result>
-			<result type="redirect" name="fail">/WEB-INF/jsp/login/fail.jsp</result>
+			<result name="fail">/WEB-INF/jsp/login/fail.jsp</result>
 			<result name="error">/WEB-INF/jsp/login/fail.jsp</result>
+			<result name="input">/WEB-INF/jsp/login/login.jsp</result>
 		</action>
 
 		<!-- 显示注册的页面 -->
@@ -57,7 +54,7 @@
 			<result>/WEB-INF/jsp/login/welcome.jsp</result>
 			<result name="fails">/WEB-INF/jsp/login/fail.jsp</result>
 		</action>
-	
+		
 	</package>
 
 
@@ -65,15 +62,19 @@
 
 	<!-- 第二个模块，员工管理 -->
 	<package name="emp" namespace="/emp" extends="login">
+	
+		<!-- 声明自定义拦截器 -->
+		<interceptors>
+			<interceptor name="isLogin" class="com.s126.demo.interceptor.ListAllInterceptor"></interceptor>
+			<interceptor name="isDelete" class="com.s126.demo.interceptor.DeleteInterceptor"></interceptor>
+		
+		</interceptors>
+		
 		<action name="*" class="com.s126.demo.action.EmpAction" method="{1}">
-
-			<!-- 引用拦截器 -->
-			<interceptor-ref name="isLogin"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-
+			<result name="listAll">/WEB-INF/jsp/emp/listAll.jsp</result>
+			<result name="ierror" type="redirect">/login/login.html</result>
 			<result name="update">/WEB-INF/jsp/emp/update.jsp</result>
 			<result name="add">/WEB-INF/jsp/emp/add.jsp</result>
-			<result name="listAll">/WEB-INF/jsp/emp/listAll.jsp</result>
 			<result name="delete">/WEB-INF/jsp/emp/delete.jsp</result>
 		</action>
 	</package>
@@ -102,6 +103,11 @@
 		<action name="interceptor" class="com.s126.demo.test.TestAction" method="testInterceptor">
 			<!-- 这个请求使用下面两个定义的拦截器。可以执行看看输出顺序 -->
 			<interceptor-ref name="aaa" />
+			<interceptor-ref name="bbb" />
+			<interceptor-ref name="aaa" />
+			<interceptor-ref name="bbb" />
+			<interceptor-ref name="bbb" />
+			<interceptor-ref name="bbb" />
 			<interceptor-ref name="bbb" />
 			<result>/WEB-INF/jsp/login/error.jsp</result>
 		</action>

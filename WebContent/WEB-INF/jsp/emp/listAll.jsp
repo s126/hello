@@ -24,7 +24,11 @@
 			<td>${name}</td>
 			<td><s:property value="job"/></td>
 			<td><s:property value="#j.sal"/></td>
-			<td><a href="delete.html?ename=${name}">删除</a></td>
+			<td>
+				<s:if test="#session.account.acctype == 2 || #session.account.acctype == 3">
+					<a href="delete.html?ename=${name}">删除</a>
+				</s:if>
+			</td>	
 		</tr>
 	</s:iterator>
 	
