@@ -8,6 +8,7 @@ public class Account {
 	private String password;
 	private int acctype;         // 1, 学生；  2, 老师； 3, 校长
 	private Date lastLogin;      // 上次登录时间
+	private Date birthday;       // 生日
 	
 	
 	public String getUsername() {
@@ -34,6 +35,12 @@ public class Account {
 	}
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.s126.demo.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,19 +45,18 @@ public class LoginDao {
 	 */
 	public boolean addAccount (Account account) {
 		Connection conn = DBUtil.getCon();
-		String sql = "insert into account (username, password, acctype) values (?, ?, ?)";
+		String sql = "insert into account (username, password, acctype, birthday) values (?, ?, ?, ?)";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
 		try {
 			// 事务处理
 			conn.setAutoCommit(false);
-
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, account.getUsername());
 			ps.setString(2, account.getPassword());
 			ps.setInt(3, account.getAcctype() == 0 ? 1 : account.getAcctype());
-			
+			ps.setDate(4, new Date(account.getBirthday().getTime()));
 			ps.execute();
 			
 			conn.commit();
@@ -69,7 +69,7 @@ public class LoginDao {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			
+			e.printStackTrace();
 			return false;
 			
 		} finally {

@@ -15,8 +15,13 @@
 			<s:textfield label="账号" name="acc.username" />
 			<s:textfield label="密码" name="acc.password" />
 			<s:textfield label="确认密码" name="pwd" />
+			<s:textfield label="生日" type="date" name="acc.birthday" />
+			<s:select label="类型" name="acc.acctype" list="#{1:'学生', 2:'老师', 3:'校长'}"></s:select>
 			<s:submit value="注册" />
 		</s:form>
 	</div>
+	
+	
+	<s:debug></s:debug>
 </body>
 </html>

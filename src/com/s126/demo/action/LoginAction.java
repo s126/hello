@@ -21,7 +21,7 @@ public class LoginAction extends ActionSupport {
 	/**
 	 * 公用的验证方法。这个 Action 里面所有的请求方法，都会在执行前执行这个 validate
 	 */
-	@Override
+/*	@Override
 	public void validate() {
 		
 		// 这是一个 ActionError 的示例。
@@ -32,7 +32,7 @@ public class LoginAction extends ActionSupport {
 		}
 		// 在这里写我们所有的公用验证逻辑。
 		System.out.println("helloWorld");
-	}
+	}*/
 
 
 
@@ -41,7 +41,9 @@ public class LoginAction extends ActionSupport {
 	 * 特定于 login 方法的验证
 	 */
 	public void validateLogin() {
-		
+		if(name == null || name.isEmpty()) {
+			addFieldError("name", "您的用户名不能为空。");
+		}
 		if(pwd == null || pwd.isEmpty()) {
 			addFieldError("pwd", "密码太短。");
 		}
@@ -65,6 +67,11 @@ public class LoginAction extends ActionSupport {
 
 	
 	
+	public String registerIndex ()	 {
+		// 出事后处理
+		return SUCCESS;
+	}
+	
 	
 	/* 注册功能 */
 	public String register() {
@@ -72,6 +79,10 @@ public class LoginAction extends ActionSupport {
 			return "fails";
 		return SUCCESS;
 	}
+	
+	
+	
+	
 
 	public String getName() {
 		return name;

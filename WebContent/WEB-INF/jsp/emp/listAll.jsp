@@ -28,6 +28,7 @@
 				<s:if test="#session.account.acctype == 2 || #session.account.acctype == 3">
 					<a href="delete.html?ename=${name}">删除</a>
 				</s:if>
+				
 			</td>	
 		</tr>
 	</s:iterator>

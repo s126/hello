@@ -6,8 +6,11 @@
 
 <struts>
 
+	<!-- 开启开发模式，这样出错会有更详细的显示信息，便于调试 -->
 	<constant name="struts.devMode" value="true" />
+	<!-- 设置action请求的后缀名 -->
 	<constant name="struts.action.extension" value="action,html,," />
+	<!-- 是否开启 DMI 模式，默认不建议开启，会导致严重的安全问题 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 
 
@@ -23,7 +26,7 @@
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
-
+  
 		<!-- 显示登录的主页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/login.action -->
 		<action name="login">
@@ -43,16 +46,16 @@
 
 		<!-- 显示注册的页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/register.action -->
-		<action name="register">
+		<action name="register" class="com.s126.demo.action.LoginAction" method="registerIndex">
 			<result>/WEB-INF/jsp/login/register.jsp</result>
 		</action>
 
 		<!-- 完成注册相关的操作 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/registerSubmit.action -->
-		<action name="registerSubmit" class="com.s126.demo.action.LoginAction"
-			method="register">
-			<result>/WEB-INF/jsp/login/welcome.jsp</result>
+		<action name="registerSubmit" class="com.s126.demo.action.LoginAction" method="register">
+			<result name="success">/WEB-INF/jsp/login/welcome.jsp</result>
 			<result name="fails">/WEB-INF/jsp/login/fail.jsp</result>
+			<result name="input">/WEB-INF/jsp/login/register.jsp</result>
 		</action>
 		
 	</package>
@@ -90,6 +93,7 @@
 	
 	
 	
+	
 	<!-- 测试模块 -->
 	<package name="test" namespace="/test" extends="struts-default">
 		
@@ -103,11 +107,6 @@
 		<action name="interceptor" class="com.s126.demo.test.TestAction" method="testInterceptor">
 			<!-- 这个请求使用下面两个定义的拦截器。可以执行看看输出顺序 -->
 			<interceptor-ref name="aaa" />
-			<interceptor-ref name="bbb" />
-			<interceptor-ref name="aaa" />
-			<interceptor-ref name="bbb" />
-			<interceptor-ref name="bbb" />
-			<interceptor-ref name="bbb" />
 			<interceptor-ref name="bbb" />
 			<result>/WEB-INF/jsp/login/error.jsp</result>
 		</action>
