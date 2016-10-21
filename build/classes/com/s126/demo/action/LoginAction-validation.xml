@@ -9,15 +9,10 @@
 	
 	<!-- 验证 name 字段 -->
 	<field name="name">
-		<!-- <field-validator type="required">
-			<message>名字不能为空</message>
-		</field-validator> -->
 		<field-validator type="regex">
 			<param name="regex"><![CDATA[\w{4,}]]></param>
 			<message>名字需要由4位以上英文字符组成</message>
 		</field-validator>
 	</field>
-	
-
 
 </validators>

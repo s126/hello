@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.s126.demo.bean.Account;
 import com.s126.demo.util.DBUtil;
@@ -20,7 +22,7 @@ public class LoginDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Account account = null;
-		
+
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, name);
@@ -32,23 +34,22 @@ public class LoginDao {
 				account.setAcctype(rs.getInt(2));
 				account.setLastLogin(rs.getTimestamp(3));
 			}
-			
+
 		} catch (Exception e) {
 		}
-		
+
 		return account;
 	}
-	
-	
+
 	/**
 	 * 增加一个新的账号.
 	 */
-	public boolean addAccount (Account account) {
+	public boolean addAccount(Account account) {
 		Connection conn = DBUtil.getCon();
-		String sql = "insert into account (username, password, acctype, birthday) values (?, ?, ?, ?)";
+		String sql = "insert into account (username, password, acctype, birthday, email, phone, sex) values (?, ?, ? , ? , ? , ?, ? )";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		try {
 			// 事务处理
 			conn.setAutoCommit(false);
@@ -57,12 +58,15 @@ public class LoginDao {
 			ps.setString(2, account.getPassword());
 			ps.setInt(3, account.getAcctype() == 0 ? 1 : account.getAcctype());
 			ps.setDate(4, new Date(account.getBirthday().getTime()));
+			ps.setString(5, account.getEmail());
+			ps.setString(6, account.getPhone());
+			ps.setInt(7, account.getSex());
 			ps.execute();
-			
+
 			conn.commit();
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			try {
 				conn.rollback();
@@ -71,12 +75,39 @@ public class LoginDao {
 			}
 			e.printStackTrace();
 			return false;
-			
+
 		} finally {
 			DBUtil.closeAll(rs, ps, conn);
 		}
 	}
+
 	
+	
+	/**
+	 * 获取所有的身份类型，学生、老师等
+	 */
+	public Map<Integer, String> getAccTypes() {
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		String sql = "select tid, tname from types where 1=1";
+		Connection conn = DBUtil.getCon();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				map.put(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.closeAll(rs, ps, conn);
+		}
+		return map;
+	}
+	
+	
+
 	public static void main(String[] args) {
 		LoginDao loginDao = new LoginDao();
 		System.out.println(loginDao.checkLogin("zhouqiang", "1234567"));

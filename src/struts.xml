@@ -35,8 +35,7 @@
 
 		<!-- 完成登录相关的操作 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/loginSubmit.action -->
-		<action name="loginSubmit" class="com.s126.demo.action.LoginAction"
-			method="login">
+		<action name="loginSubmit" class="com.s126.demo.action.LoginAction" method="loginSubmit">
 			<!-- 类型，重定向和转发 -->
 			<result name="success" type="redirect">/emp/listAll.html</result>
 			<result name="fail">/WEB-INF/jsp/login/fail.jsp</result>
@@ -44,15 +43,16 @@
 			<result name="input">/WEB-INF/jsp/login/login.jsp</result>
 		</action>
 
+
 		<!-- 显示注册的页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/register.action -->
 		<action name="register" class="com.s126.demo.action.LoginAction" method="registerIndex">
-			<result>/WEB-INF/jsp/login/register.jsp</result>
+			<result name="success">/WEB-INF/jsp/login/register.jsp</result>
 		</action>
 
 		<!-- 完成注册相关的操作 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/registerSubmit.action -->
-		<action name="registerSubmit" class="com.s126.demo.action.LoginAction" method="register">
+		<action name="registerSubmit" class="com.s126.demo.action.LoginAction" method="registerSubmit">
 			<result name="success">/WEB-INF/jsp/login/welcome.jsp</result>
 			<result name="fails">/WEB-INF/jsp/login/fail.jsp</result>
 			<result name="input">/WEB-INF/jsp/login/register.jsp</result>
@@ -91,8 +91,7 @@
 	</package>
 	
 	
-	
-	
+		
 	
 	<!-- 测试模块 -->
 	<package name="test" namespace="/test" extends="struts-default">
@@ -122,6 +121,11 @@
 		<action name="ognl" class="com.s126.demo.test.OgnlAction" method="testOGNL">
 			<result>/WEB-INF/jsp/test/ognl.jsp</result>
 		</action>
+		
+		<action name="tags" class="com.s126.demo.test.TagsAction" method="tags">
+			<result>/WEB-INF/jsp/test/tags.jsp</result>
+		</action>
+		
 	</package>
 
 

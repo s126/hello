@@ -1,5 +1,10 @@
 package com.s126.demo.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
@@ -10,51 +15,45 @@ public class LoginAction extends ActionSupport {
 
 	private String name;
 	private String pwd;
-	private Account acc = null;
 
+	private Account acc = null;
 	private LoginDao loginDao = new LoginDao();
 
-	
 	
 	
 	
 	/**
 	 * 公用的验证方法。这个 Action 里面所有的请求方法，都会在执行前执行这个 validate
 	 */
-/*	@Override
+	@Override
 	public void validate() {
-		
-		// 这是一个 ActionError 的示例。
-		// addActionError("无缘无故的 Action 错误.");
-		
-		if(name == null || name.isEmpty()) {
-			addFieldError("name", "您的用户名不能为空。");
-		}
 		// 在这里写我们所有的公用验证逻辑。
+		// 如果在其中写了 addXxxError 的方法，执行完后， struts 会跳转到 input 页面
 		System.out.println("helloWorld");
-	}*/
+	}
 
-
-
-
+	
+	
+	
 	/**
-	 * 特定于 login 方法的验证
+	 * 特定于 loginSubmit 方法的验证
 	 */
-	public void validateLogin() {
-		if(name == null || name.isEmpty()) {
+	public void validateLoginSubmit() {
+		if (name == null || name.isEmpty()) {
 			addFieldError("name", "您的用户名不能为空。");
 		}
-		if(pwd == null || pwd.isEmpty()) {
+		if (pwd == null || pwd.isEmpty()) {
 			addFieldError("pwd", "密码太短。");
 		}
-		
+
 		System.out.println("ok,local validate.");
 	}
-	
-	/* 登录功能 */
-	// 可以通过 InputConfig 注解，来指定，如果在 validate 方法中出现错误的话，那么跳转到哪个 result.
-	@InputConfig(resultName="input")
-	public String login() {
+
+	/**
+	 * 提交信息，进行登录
+	 */
+	@InputConfig(resultName = "input") // 可以通过 InputConfig 注解，来指定，如果在 validate 方法中出现错误的话，那么跳转到哪个 result.
+	public String loginSubmit() {
 
 		acc = loginDao.checkLogin(name, pwd);
 		if (acc == null) {
@@ -67,18 +66,59 @@ public class LoginAction extends ActionSupport {
 
 	
 	
-	public String registerIndex ()	 {
-		// 出事后处理
+	
+	/**
+	 * 用来显示注册的页面
+	 */
+	public String registerIndex() {
+
+		// 获取 request 对象。这是 struts 封装的一个 Map 类型。
+		// 取 request 这么复杂，说明 struts 不建议你使用 request 对象，因为能用 request
+		// 存取的数据，可以直接使用值栈存取。
+		Map<String, Object> session = (Map<String, Object>) ActionContext.getContext().getSession();
+
+		// 创建一个性别相关的 Map，在 jsp 中，可以这样使用
+		// <s:radio label="性別" name="acc.sex" list="#request.sexmap" />
+		// <s:radio label="性別" name="acc.sex" list="#request.sexmap"
+		// listKey="key" listValue="value" />
+		Map<Integer, String> sexmap = new HashMap<Integer, String>();
+		sexmap.put(1, "m");
+		sexmap.put(2, "f");
+		sexmap.put(3, "u");
+
+		// 创建一个对象列表，在 jsp 中，可以这样使用
+		// <s:radio label="性別" name="acc.sex" list="#request.sexlist" value="3"
+		// listKey="code" listValue="name" />
+		List<Sex> sexlist = new ArrayList<Sex>();
+		sexlist.add(new Sex("男", 1, "skfdjskjfdk"));
+		sexlist.add(new Sex("女", 2, "skfdjskjfdk"));
+		sexlist.add(new Sex("未知", 3, "skfdjskjfdk"));
+
+		// 将变量保存在 request 中，这样在 jsp 中可以这样获取
+		// ${#request.sexlist}
+		// <s:property value="#request.sexmap" />
+		// 有时候，我们需要把值保存在 request 或者 session 中使用。
+		session.put("sexmap", sexmap);
+		session.put("sexlist", sexlist);
+
+		// 初始化处理，获取所有的身份类型，用来在 jsp 中显示
+		// <s:select label="身份类型" name="acc.acctype"
+		// list="#session.types"></s:select>
+		ActionContext.getContext().getSession().put("types", loginDao.getAccTypes());
+
 		return SUCCESS;
+
 	}
-	
-	
-	/* 注册功能 */
-	public String register() {
+
+	/**
+	 * 提交注册信息
+	 */
+	public String registerSubmit() {
 		if (!loginDao.addAccount(acc))
 			return "fails";
 		return SUCCESS;
 	}
+	
 	
 	
 	
@@ -106,5 +146,48 @@ public class LoginAction extends ActionSupport {
 
 	public void setAcc(Account acc) {
 		this.acc = acc;
+	}
+
+}
+
+
+
+
+/**
+ * 性别类，用作示例。一般情况下用 Map 表示性别即可。
+ */
+class Sex {
+	private String name;
+	private int code;
+	private String pres;
+
+	public Sex(String name, int code, String pres) {
+		this.name = name;
+		this.code = code;
+		this.pres = pres;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public String getPres() {
+		return pres;
+	}
+
+	public void setPres(String pres) {
+		this.pres = pres;
 	}
 }
