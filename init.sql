@@ -15,13 +15,15 @@ insert into vip.types(tid,tname) values(2,'老师');
 insert into vip.types(tid,tname) values(3,'校长');
 commit;
 
+
+
 create table vip.account(
 	username varchar2(20) primary key,
 	password varchar2(20) not null,
 	acctype int not null,
 	lastlogin timestamp,
 	status int default 1, 
-  constraint fk_acctype foreign key (acctype) references vip.types(tid)
+    constraint fk_acctype foreign key (acctype) references vip.types(tid)
 );
 
 
@@ -36,10 +38,33 @@ commit;
 create table vip.emp as select * from scott.emp;
 
 
-select * from vip.account;
-select * from vip.types;
-
-
 alter table vip.account add birthday Date;
+alter table vip.account add sex number(1);
+alter table vip.account add phone varchar2(11);
+alter table vip.account add email varchar2(20);
 
 
+
+
+
+
+
+
+-- 创建序列，用于商品表的主键
+create sequence vip.seq_items start with 1000;
+
+-- 按照题目要求，创建商品信息表
+create table vip.items_info
+(
+	item_id number primary key,
+	item_name varchar2(50) not null,
+	item_price number(9,2) not null,
+	create_time timestamp not null,
+	status number(1) not null
+);
+
+-- 插入几行测试数据
+insert into vip.items_info (item_id, item_name, item_price, create_time, status) values (vip.seq_items.nextval, 'IPhone7', 7280, to_date('20160908', 'yyyymmdd'), 0);
+insert into vip.items_info (item_id, item_name, item_price, create_time, status) values (vip.seq_items.nextval, 'IPhone6', 5380, to_date('20140409', 'yyyymmdd'), 0);
+insert into vip.items_info (item_id, item_name, item_price, create_time, status) values (vip.seq_items.nextval, 'IPhone4', 2500, to_date('20120408', 'yyyymmdd'), 0);
+commit;
