@@ -28,7 +28,6 @@
 			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
 		</global-exception-mappings>
   	
-  		
   
 		<!-- 显示登录的主页面 -->
 		<!-- 请求的 url 为 localhost:8088/hello/login/login.action -->
@@ -96,14 +95,20 @@
 			</interceptor-stack>
 		</interceptors>
 		
-		<default-interceptor-ref name="privsStack"></default-interceptor-ref>
+		<!-- <default-interceptor-ref name="privsStack"></default-interceptor-ref> -->
+		<action name="searchEmp" class="s126.hello.action.EmpAction" method="search">
+			<result type="json">
+  				<param name="root">emps</param>
+  			</result>
+		</action>
 		
 		<action name="*" class="s126.hello.action.EmpAction" method="{1}">
-			<result name="listAll">/WEB-INF/jsp/emp/listAll.jsp</result>
+			<result name="list">/WEB-INF/jsp/emp/list.jsp</result>
 			<result name="ierror" type="redirect">/login/login.html</result>
 			<result name="update">/WEB-INF/jsp/emp/update.jsp</result>
-			<result name="add">/WEB-INF/jsp/emp/add.jsp</result>
+			<result name="addIndex">/WEB-INF/jsp/emp/addIndex.jsp</result>
 			<result name="delete">/WEB-INF/jsp/emp/delete.jsp</result>
+			<result name="input">/WEB-INF/jsp/emp/add.jsp</result>
 		</action>
 		
 	</package>

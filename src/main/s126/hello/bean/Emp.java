@@ -2,9 +2,18 @@ package s126.hello.bean;
 
 public class Emp {
 
+	private int id;
 	private String name;
 	private int sal;
 	private String job;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -32,7 +41,8 @@ public class Emp {
 
 	@Override
 	public String toString() {
-		return "Emp [name=" + name + ", sal=" + sal + ", job=" + job + "]";
+		return "Emp [id=" + id + ", name=" + name + ", sal=" + sal + ", job="
+				+ job + "]";
 	}
 
 }
