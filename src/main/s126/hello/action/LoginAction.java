@@ -175,7 +175,7 @@ public class LoginAction extends ActionSupport {
 	 */
 	public String registerSubmit() {
 		if (!loginDao.addAccount(acc))
-			return "fails";
+			return "fail";
 		return SUCCESS;
 	}
 	

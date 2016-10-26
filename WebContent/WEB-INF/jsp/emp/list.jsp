@@ -78,7 +78,7 @@
 			<s:submit value="按照工资范围搜索" />
 		</s:form>
 	</div>
-	<a href="addIndex">添加员工</a>
+	<a href="addIndex.action">添加员工</a>
 
 	<table id="dialog">
 		<tr>

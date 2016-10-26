@@ -57,10 +57,13 @@ public class EmpAction extends ActionSupport {
 		return "addIndex";
 	}
 	
+	
 	/* 增加员工 */
 	public String addSubmit() throws Exception {
 		boolean bl = false;
 		bl = empDao.add(emp);
+		
+		
 		if (bl) {
 			msg = "添加成功";
 			return listAll();
@@ -68,6 +71,7 @@ public class EmpAction extends ActionSupport {
 			msg = "添加失败";
 			return addIndex();
 		}
+	
 	}
 
 	/* 显示页面搜索功能 */

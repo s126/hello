@@ -9,14 +9,16 @@
 </head>
 <body>
 
-<header><s:text name="action.login.headtip" /></header>
+<%@ include file="../pages/header.jspf" %>
+<%-- <jsp:include page="/WEB-INF/jsp/pages/header.jspf" />  --%>
 
 <div class="centerblock">
 	
 	<s:form action="loginSubmit">
-		<s:textfield name="name" key="action.login.name"></s:textfield>
-		<s:textfield name="pwd" key="action.login.pwd"></s:textfield>
+		<s:textfield name="name" key="action.login.name" autocomplete="off"></s:textfield>
+		<s:password name="pwd" key="action.login.pwd"></s:password>
 		<s:submit key="action.login.sbm"></s:submit>
+		<s:token></s:token>
 	</s:form>
 	
 </div>

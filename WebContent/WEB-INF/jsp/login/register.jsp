@@ -26,6 +26,7 @@
 </head>
 
 <body>
+<%@ include file="../pages/header.jspf" %>
 	<div class="centerblock">
 		<s:form action="registerSubmit">
 			<s:textfield label="账号" name="acc.username" onchange="checkName(this)" />
