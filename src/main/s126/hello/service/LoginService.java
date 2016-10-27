@@ -1,12 +1,25 @@
 package s126.hello.service;
 
+import s126.hello.bean.Account;
 import s126.hello.dao.LoginDao;
 
 public class LoginService {
 
 	private LoginDao loginDao = new LoginDao();
-	
-	public void login(String name, String pwd) {
-		loginDao.checkLogin(name, pwd);
+
+	public boolean checkEname(String username) {
+		return loginDao.checkEname(username);
+	}
+
+	public Account checkLogin(String username, String password) {
+		return loginDao.checkLogin(username, password);
+	}
+
+	public Object getAccTypes() {
+		return loginDao.getAccTypes();
+	}
+
+	public boolean addAccount(Account account) {
+		return loginDao.addAccount(account);
 	}
 }

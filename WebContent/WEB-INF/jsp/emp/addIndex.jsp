@@ -4,14 +4,14 @@
 <!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>员工增加</title>
 </head>
 <body>
 
 <s:form action="addSubmit" method="post">
 	<s:token />
-	<s:textfield label="姓名" name="emp.name"></s:textfield>
+	<s:textfield label="姓名" name="emp.ename"></s:textfield>
 	<s:textfield label="工资" name="emp.sal"></s:textfield>
 	<s:select label="职位" list="#session.jobs" name="emp.job"></s:select>
 	<s:submit value="添加"></s:submit>

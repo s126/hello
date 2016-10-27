@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import s126.hello.bean.Account;
-import s126.hello.dao.LoginDao;
+import s126.hello.service.LoginService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -24,64 +24,60 @@ public class LoginAction extends ActionSupport {
 
 	private String name;
 	private String pwd;
+	private String result;
 
-	private InputStream inputStream;
-	
-	String result;
 	private Account acc = null;
-	private LoginDao loginDao = new LoginDao();
-	
+	private InputStream inputStream;
+
+	private LoginService loginService = new LoginService();
+
 	private List<String> reslist = new ArrayList<String>();
 
-	
+	/**
+	 * 原生方法
+	 */
 	public String judgeUsername() throws IOException {
-		boolean checkEname = loginDao.checkEname(acc.getUsername());
-		
+		boolean checkEname = loginService.checkEname(acc.getUsername());
+
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
+
 		if (checkEname)
 			out.write("用户已存在");
 		else
 			out.write("可以注册");
-		
+
 		return null;
 	}
-	
+
+	/**
+	 * result type=stream
+	 */
 	public String judgeUsername2() throws IOException {
-		
-		boolean checkEname = loginDao.checkEname(acc.getUsername());
-		
+
+		boolean checkEname = loginService.checkEname(acc.getUsername());
+
 		String result = checkEname ? "用户已存在" : "可以注册";
-		
+
 		inputStream = new ByteArrayInputStream(result.getBytes("UTF-8"));
-		
+
 		return SUCCESS;
 	}
-	
+
+	/**
+	 * json-plugin
+	 */
 	public String judgeUsername3() throws IOException {
-		boolean checkEname = loginDao.checkEname(acc.getUsername());
-		if(checkEname)
-			result ="用户已存在!";
+		boolean checkEname = loginService.checkEname(acc.getUsername());
+		if (checkEname)
+			result = "用户已存在!";
 		else
-			result ="可以注册!";
-		
-		reslist.add("haha");
-		reslist.add("hehe");
-		reslist.add("heiehi");
-		reslist.add("xxxx");
-		
-		
-		return "success";
+			result = "可以注册!";
+
+		return SUCCESS;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 公用的验证方法。这个 Action 里面所有的请求方法，都会在执行前执行这个 validate
 	 */
@@ -89,12 +85,9 @@ public class LoginAction extends ActionSupport {
 	public void validate() {
 		// 在这里写我们所有的公用验证逻辑。
 		// 如果在其中写了 addXxxError 的方法，执行完后， struts 会跳转到 input 页面
-		System.out.println("helloWorld");
+		System.out.println("在 LoginAcion.validate()中，我们没做任何事情.");
 	}
 
-	
-	
-	
 	/**
 	 * 特定于 loginSubmit 方法的验证
 	 */
@@ -105,17 +98,15 @@ public class LoginAction extends ActionSupport {
 		if (pwd == null || pwd.isEmpty()) {
 			addFieldError("pwd", "密码太短。");
 		}
-
-		System.out.println("ok,local validate.");
 	}
 
 	/**
 	 * 提交信息，进行登录
 	 */
-	@InputConfig(resultName = "input") // 可以通过 InputConfig 注解，来指定，如果在 validate 方法中出现错误的话，那么跳转到哪个 result.
+	@InputConfig(resultName = "input")
+	// 可以通过 InputConfig 注解，来指定，如果在 validate 方法中出现错误的话，那么跳转到哪个 result.
 	public String loginSubmit() {
-
-		acc = loginDao.checkLogin(name, pwd);
+		acc = loginService.checkLogin(name, pwd);
 		if (acc == null) {
 			return "fail";
 		}
@@ -124,9 +115,6 @@ public class LoginAction extends ActionSupport {
 
 	}
 
-	
-	
-	
 	/**
 	 * 用来显示注册的页面
 	 */
@@ -164,7 +152,8 @@ public class LoginAction extends ActionSupport {
 		// 初始化处理，获取所有的身份类型，用来在 jsp 中显示
 		// <s:select label="身份类型" name="acc.acctype"
 		// list="#session.types"></s:select>
-		ActionContext.getContext().getSession().put("types", loginDao.getAccTypes());
+		ActionContext.getContext().getSession()
+				.put("types", loginService.getAccTypes());
 
 		return SUCCESS;
 
@@ -174,15 +163,10 @@ public class LoginAction extends ActionSupport {
 	 * 提交注册信息
 	 */
 	public String registerSubmit() {
-		if (!loginDao.addAccount(acc))
+		if (!loginService.addAccount(acc))
 			return "fail";
 		return SUCCESS;
 	}
-	
-	
-	
-	
-	
 
 	public String getName() {
 		return name;
@@ -229,9 +213,6 @@ public class LoginAction extends ActionSupport {
 	}
 
 }
-
-
-
 
 /**
  * 性别类，用作示例。一般情况下用 Map 表示性别即可。

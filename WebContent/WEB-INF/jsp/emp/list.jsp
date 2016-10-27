@@ -31,12 +31,12 @@
 							for ( var i in data) {
 
 								html += "<tr>";
-								html += " <td>" + data[i].name + "</td>";
+								html += " <td>" + data[i].ename + "</td>";
 								html += " <td>" + data[i].job + "</td>";
 								html += " <td>" + data[i].sal + "</td>";
 								<s:if test="#session.account.acctype == 2 || #session.account.acctype == 3">
 								html += "<td><a href='delete.html?ename="
-										+ data[i].name + "'>删除</a></td>"
+										+ data[i].ename + "'>删除</a></td>"
 								</s:if>
 								html += "</tr>";
 							}
@@ -78,7 +78,7 @@
 			<s:submit value="按照工资范围搜索" />
 		</s:form>
 	</div>
-	<a href="addIndex.action">添加员工</a>
+	<a href="addIndex">添加员工</a>
 
 	<table id="dialog">
 		<tr>
@@ -89,10 +89,10 @@
 
 		<s:iterator var="j" value="emps">
 			<tr>
-				<td>${name}</td>
+				<td>${ename}</td>
 				<td><s:property value="job" /></td>
 				<td><s:property value="#j.sal" /></td>
-				<td><a href="delete.html?emp.id=${id}">删   除</a></td>
+				<td><a href="delete.html?emp.empno=${empno}">删   除</a></td>
 			</tr>
 		</s:iterator>
 

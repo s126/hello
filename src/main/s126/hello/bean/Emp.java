@@ -2,47 +2,41 @@ package s126.hello.bean;
 
 public class Emp {
 
-	private int id;
-	private String name;
+	private int empno;
+	private String ename;
 	private int sal;
 	private String job;
-
-	public int getId() {
-		return id;
+	
+	
+	public int getEmpno() {
+		return empno;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	public void setEmpno(int empno) {
+		this.empno = empno;
 	}
-
-	public String getName() {
-		return name;
+	public String getEname() {
+		return ename;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
-
 	public int getSal() {
 		return sal;
 	}
-
 	public void setSal(int sal) {
 		this.sal = sal;
 	}
-
 	public String getJob() {
 		return job;
 	}
-
 	public void setJob(String job) {
 		this.job = job;
 	}
-
 	@Override
 	public String toString() {
-		return "Emp [id=" + id + ", name=" + name + ", sal=" + sal + ", job="
-				+ job + "]";
+		return "Emp [empno=" + empno + ", ename=" + ename + ", sal=" + sal
+				+ ", job=" + job + "]";
 	}
 
+	 
 }
