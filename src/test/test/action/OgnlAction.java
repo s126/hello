@@ -1,4 +1,4 @@
-package test;
+package test.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ import s126.hello.bean.Computer;
 import s126.hello.bean.Student;
 
 import com.opensymphony.xwork2.ActionContext;
+
 
 public class OgnlAction implements SessionAware {
 

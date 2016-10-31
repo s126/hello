@@ -1,8 +1,13 @@
 package s126.hello.bean;
 
+
 public class Book {
 	private String name;
 	private int price;
+	
+	public Book() {
+		super();
+	}
 	
 	public Book(String name, int price) {
 		super();
@@ -30,5 +35,7 @@ public class Book {
 	public String toString() {
 		return "Book [name=" + name + ", price=" + price + "]";
 	}
+
+
 	
-}
+} 
