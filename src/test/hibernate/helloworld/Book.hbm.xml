@@ -5,7 +5,7 @@
     
 <hibernate-mapping>
 
-	<class name="sss.Book" table="t_book">
+	<class name="hibernate.helloworld.Book" table="t_book">
 		<id name="bookno" length="22">
 			<generator class="native"></generator>
 		</id>

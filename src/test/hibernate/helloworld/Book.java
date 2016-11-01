@@ -1,4 +1,4 @@
-package test.hibernate.helloworld;
+package hibernate.helloworld;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
