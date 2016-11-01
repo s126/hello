@@ -6,12 +6,12 @@
 <hibernate-mapping>
 
 	<class name="hibernate.helloworld.Book" table="t_book">
-		<id name="bookno" length="22">
+		<id name="bookno">
 			<generator class="native"></generator>
 		</id>
 		
-		<property name="name"></property>
-		<property name="price"></property>
+		<property name="name" column="book_name" length="22" unique-key="uk_bookname" type="string"></property>
+		<property name="price" column="book_price" not-null="true"></property>
 	</class>
 	
 	

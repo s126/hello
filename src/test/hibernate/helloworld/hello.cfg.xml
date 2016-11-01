@@ -13,9 +13,11 @@
         
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         
-        <mapping class="hibernate.helloworld.Book" />
+        <mapping resource="hibernate/helloworld/Book.hbm.xml" />
         
     </session-factory>
+    
 </hibernate-configuration>
+
