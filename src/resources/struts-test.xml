@@ -16,30 +16,30 @@
       <interceptor name="bbb" class="test.interceptor.BI"></interceptor>
     </interceptors>
     
-    <action name="interceptor" class="test.TestAction" method="testInterceptor">
+    <action name="interceptor" class="test.action.TestAction" method="testInterceptor">
       <!-- 这个请求使用下面两个定义的拦截器。可以执行看看输出顺序 -->
       <interceptor-ref name="aaa" />
       <interceptor-ref name="bbb" />
       <result>/WEB-INF/jsp/login/error.jsp</result>
     </action>
     
-    <action name="testNoDefault" class="test.TestAction" method="testNoDefault">
+    <action name="testNoDefault" class="test.action.TestAction" method="testNoDefault">
       <result>/test/testNoDefault.jsp</result>
       <interceptor-ref name="aaa"></interceptor-ref>
       <interceptor-ref name="defaultStack"></interceptor-ref>
     </action>
 
     <!-- 这是一个测试 ognl的请求 -->
-    <action name="ognl" class="test.OgnlAction" method="testOGNL">
+    <action name="ognl" class="test.action.OgnlAction" method="testOGNL">
       <result>/test/ognl.jsp</result>
     </action>
     
-    <action name="tags" class="test.TagsAction" method="tags">
+    <action name="tags" class="test.action.TagsAction" method="tags">
       <result>/test/tags.jsp</result>
     </action>
     
     <!-- i18n 测试 -->
-    <action name="i18n" class="test.I18nAction">
+    <action name="i18n" class="test.action.I18nAction">
       <result>/test/i18n.jsp</result>
     </action>
     
