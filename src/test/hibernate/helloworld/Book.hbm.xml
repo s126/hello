@@ -4,15 +4,12 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
      
 <hibernate-mapping>
-
 	<class name="hibernate.helloworld.Book" table="t_book">
 		<id name="bookno">
 			<generator class="native"></generator>
 		</id>
 		
-		<property name="name" column="book_name" length="22" unique-key="uk_bookname" type="string"></property>
-		<property name="price" column="book_price" not-null="true"></property>
+		<property name="name" column="name" length="22"></property>
+		<property name="price"></property>
 	</class>
-	
-	
 </hibernate-mapping>

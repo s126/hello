@@ -1,9 +1,8 @@
 package hibernate.helloworld;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Random;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,7 +26,6 @@ public class A {
 	// 第 6.3 步，创建 Transaction
 	// 第 6.4 步，通过 Query 等进行查询；通过 save/delete 等进行增删。
 	// 第 6.5 步，提交事务，关闭 session，关闭 SessionFactory。
-	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		// 初始化加载配置对象
 		Configuration config = new Configuration();
@@ -45,9 +43,14 @@ public class A {
 
 		// 插入数据到数据库
 		try {
-			session.save(new Book("aava", new Random().nextFloat()));
-			session.save(new Book("aava", new Random().nextFloat()));
 
+			Author author = new Author();
+			author.setBirth(new Date());
+			author.setName("霍金");
+			session.save(author);
+
+			System.out.println("保存 author 实体类.");
+			
 			transaction.commit();
 
 			System.out.println(">>> 插入结束");
@@ -57,17 +60,6 @@ public class A {
 			transaction.rollback();
 		}
 
-		// 从数据库中查询数据。这里用的是 Query 对象
-		Query query = session.createQuery("from Book");
-		List<Book> booklist = query.list();
-
-		System.out.println(">>> 查询完成");
-
-		System.out.println(booklist);
-
-		System.out.println(">>> 一定不要忘记提交事务，释放资源");
-		
-		
 		session.close();
 		sessionFactory.close();
 	}

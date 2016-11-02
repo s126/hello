@@ -2,6 +2,7 @@ package hibernate.helloworld;
 
 
 
+
 public class Book {
 
 	private Integer bookno;

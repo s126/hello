@@ -15,7 +15,8 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         
-        <mapping resource="hibernate/helloworld/Book.hbm.xml" />
+<!-- 		<mapping resource="hibernate/helloworld/Book.hbm.xml" /> -->
+		<mapping class="hibernate.helloworld.Author" />
         
     </session-factory>
     
