@@ -2,10 +2,13 @@ package test.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 
 import s126.hello.bean.Emp;
 import s126.hello.dao.BaseDao;
+import s126.hello.util.DBUtil;
 
 public class BaseDaoTest {
 
@@ -31,5 +34,14 @@ public class BaseDaoTest {
 		List<Emp> elst = new BaseDao().query(Emp.class, sql);
 		System.out.println(elst);
 	}
-
+	@Test
+	public void testGetSessionFactory(){
+		SessionFactory sessionFactory = DBUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		List<Emp> ls = session.createQuery("From Emp").list();
+		System.out.println(ls.size());
+		for (Emp emp : ls) {
+			System.out.println(emp);
+		}
+	}
 }

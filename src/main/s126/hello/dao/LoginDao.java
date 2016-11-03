@@ -9,11 +9,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.junit.Test;
+
 import s126.hello.bean.Account;
 import s126.hello.util.DBUtil;
 
 
 public class LoginDao extends BaseDao {
+	
+	private SessionFactory sessionFactory;
+	private Session session;
+	private Query query;
 	
 	/**
 	 * 增加一个新的账号.
@@ -26,7 +38,7 @@ public class LoginDao extends BaseDao {
 				new Date(account.getBirthday().getTime()),
 				account.getEmail(), account.getPhone(), account.getSex());
 	}
-
+	
 	
 	/**
 	 * 获取所有的身份类型，学生、老师等
@@ -58,13 +70,23 @@ public class LoginDao extends BaseDao {
 	 * @param password
 	 */
 	public Account checkLogin(String username, String password) {
-		String sql = "select username, acctype, lastlogin from account where username=? and password=?";
-		List<Account> accs = query(Account.class, sql, username, password);
-		if(accs.size() > 0)
-			return accs.get(0);
+		String sql = "from Account where username=? and password=?";
+		sessionFactory = DBUtil.getSessionFactory();
+		session = sessionFactory.openSession();
+		query = session.createQuery(sql);
+		 query.setString(0, username);
+		 query.setString(1, password);
+		List ls = query.list();
+		session.close();
+		sessionFactory.close();
+		if(ls !=null && ls.size() > 0)
+			return (Account) ls.get(0);
 		return null;
 	}
-
+	
+	public static void main(String[] a){
+		System.out.println(new LoginDao().checkLogin("123","123"));
+	}
 
 	/**
 	 * 检查用户名是否已经存在

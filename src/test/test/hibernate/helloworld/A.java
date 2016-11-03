@@ -34,6 +34,7 @@ public class A {
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
+		
 		Configuration config = new Configuration().configure("/test/hibernate/helloworld/hello.cfg.xml");
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 		SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+    	<class name="s126.hello.bean.Account" table="account">
+    		<id name="accid" column="accid">
+    			<generator class="native" />
+    		</id>
+    		<property name="username" column="username" unique-key="UK_ACC_USERNAME"/>
+    		<property name="password" column="password" />
+    		<property name="acctype" column="acctype" />
+		    <property name="lastLogin" column="lastLogin" />
+		    <property name="birthday" column="birthday" />
+		    <property name="email" column="email" />
+		    <property name="phone" column="phone" />
+		    <property name="sex" column="sex" />
+    	</class>
+    </hibernate-mapping>

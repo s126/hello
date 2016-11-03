@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+    	<class name="test.hibernate.emp.Emp" table="emp1" >
+    		<id column="empno" name="empno">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="ename" column="ename" unique="true" ></property>
+    		<property name="sal" column="sal"   />
+    		<property name="job" column="job" />
+    	</class>
+    </hibernate-mapping>

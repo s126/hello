@@ -9,6 +9,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.jboss.logging.Logger;
+import org.junit.Test;
+
+import s126.hello.dao.BaseDao;
+
 /**
  * 数据库连接关闭的辅助类
  * @author Administrator
@@ -19,7 +31,6 @@ public class DBUtil {
 	private static String url;
 	private static String user;
 	private static String password;
-
 	static {
 		try {
 
@@ -69,5 +80,67 @@ public class DBUtil {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 根据resource指定路径获取sessionFactory对象
+	 * @param
+	 * @return 返回SessionFactory对象或者null
+	 * */
+	public static SessionFactory sessionFactory;
+	private static Configuration configuration ;
+	private static Session session;
+	private static Logger log = Logger.getLogger(BaseDao.class);
+	@SuppressWarnings("deprecation")
+	
+	public static SessionFactory getSessionFactory(){
+		try{
+		   return new Configuration().configure().buildSessionFactory();
+		}catch(Exception e){
+			log.info(e);
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	/**
+	 * 获取session对象
+	 * 默认加载hibernate.cfg.xml
+	 * */
+	public static Session getSession(){
+		try{	
+			configuration = new Configuration().configure();
+			ServiceRegistry build = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			sessionFactory = configuration.buildSessionFactory(build);
+			session = sessionFactory.openSession();
+		}catch(Exception e){
+//			log.info(e);
+			e.printStackTrace();
+			return null;
+		}	
+		return session;
+	}
+	
+	public static Session getSession(String resource){
+		try{	
+			configuration = new Configuration().configure(resource);
+			ServiceRegistry build = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+			sessionFactory = configuration.buildSessionFactory(build);
+			session = sessionFactory.openSession();
+		}catch(HibernateException h){
+//			log.info("找不到资源文件");
+			h.printStackTrace();
+		}catch(Exception e){
+//			log.info(e);
+			e.printStackTrace();
+			return null;
+		}	
+		return session;
+	}
+	
+	@Test
+	public void testGetSession(){
+		DBUtil.getSession("test.main.hibernate.cfg.xml");
 	}
 }
