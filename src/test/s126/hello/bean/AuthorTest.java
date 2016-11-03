@@ -9,11 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@SuppressWarnings("unchecked")
 public class AuthorTest {
 
 	public static void main(String[] args) throws Exception {
 		String mappingClass = "hibernate.helloworld.Author";
-		@SuppressWarnings("unchecked")
 		Class<Author> c = (Class<Author>) Class.forName(mappingClass);
 
 		Annotation as = c.getAnnotation(Entity.class);

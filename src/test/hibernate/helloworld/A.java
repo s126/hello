@@ -1,67 +1,86 @@
 package hibernate.helloworld;
 
-import java.util.Date;
-import java.util.Random;
+import hibernate.BaseTest;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-public class A {
+import org.junit.Test;
 
-	// 使用 Hibernate 的步骤
-	// 第一步，建立 Web 工程
-	// 第二步，将需要用到的 jar 包，拷贝到 lib 包的下面
-	// 第三步，创建 hibernate 的配置文件 hibernate.cfg.xml，指定数据库信息、打印sql语句策略等
-	// 第四步，创建实体类 Book.java
-	// 第五步，创建数据库跟实体类的映射。有两种方式：XML方式、Annotation方式
-	// 第 5(a) 步，创建相关的xml映射文件 Book.hbm.xml
-	// 第 5(b) 步，在实体类上加相关的注解 @Entity/@Table/@Id/@GeneratedValue/@Column
-	// 第六步，在 hibernate.cfg.xml 中添加映射，开始连接
-	// 第 6.1 步，创建 sessionFactory
-	// 第 6.2 步，创建 session
-	// 第 6.3 步，创建 Transaction
-	// 第 6.4 步，通过 Query 等进行查询；通过 save/delete 等进行增删。
-	// 第 6.5 步，提交事务，关闭 session，关闭 SessionFactory。
-	public static void main(String[] args) {
-		// 初始化加载配置对象
-		Configuration config = new Configuration();
-		// 指定 Hibernate 配置文件
-		config.configure("/hibernate/helloworld/hello.cfg.xml");
-		// 初始化服务
-		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-		// 初始化 SessionFactory
-		SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);
 
-		// 获取会话对象。通过这一步进行数据库连接。接下来就可以通过这个对象进行与数据库的交互。
-		Session session = sessionFactory.openSession();
-		// 开启事务。在 Hibernate 中，默认并不是 autocommit 的，所以需要显式控制事务。
-		Transaction transaction = session.beginTransaction();
+/**
+ * hibernate 的基本语法，简单使用
+ */
 
-		// 插入数据到数据库
-		try {
+public class A extends BaseTest {
 
-			Author author = new Author();
-			author.setBirth(new Date());
-			author.setName("霍金");
-			session.save(author);
-
-			System.out.println("保存 author 实体类.");
-			
-			transaction.commit();
-
-			System.out.println(">>> 插入结束");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			transaction.rollback();
-		}
-
-		session.close();
-		sessionFactory.close();
+	@Test
+	public void testSave() throws ParseException {
+		// save 保存一条数据
+		Author author = new Author();
+		author.setName("李白");
+		author.setBirth(new SimpleDateFormat("yyyyMMdd").parse("10000101"));
+		
+		session.save(author);
 	}
 	
+	@Test
+	public void testGet() {
+		// 根据主键，查询数据。单条返回结果
+		Author author = (Author) session.get(Author.class, 3);
+		System.out.println(author);
+	}
+	
+	@Test
+	public void testLoad() {
+		// 根据主键，查询数据。单条返回结果
+		
+		// get 跟 load 的区别如下：
+		// 1. 如果查询的数据不存在的话，那么 get 会返回 null，而 load 会抛出异常。
+		// 2. get 是立即从数据库中检索数据； load 是懒加载，即只有当要使用对象的时刻，才进行加载，懒加载是通过代理实现的。
+		// 3. get 会直接连接数据库查询； load 会首先尝试从缓存中获取数据。
+		Author author = (Author) session.load(Author.class, 3);
+		System.out.println(author);
+	}
+	
+	@Test
+	public void testUpdate() {
+		// 更新数据
+	}
+	
+	@Test
+	public void testSaveOrUpdate() {
+		// 保存，或者更新。根据实体类的情况决定是要保存还是更新操作。
+	}
+	
+	@Test
+	public void testDelete() {
+		// 删除数据
+	}
+
+	@Test
+	public void testFlush() {
+		// 更新缓存
+	}
+	
+	@Test
+	public void testRefresh() {
+		// 更新缓存
+	}
+	
+	@Test
+	public void testClear() {
+		// 清理缓存
+	}
+	
+	@Test
+	public void testEvid() {
+		// 清理缓存
+	}
+	
+	@Test
+	public void testQuery() {
+		// 查询数据，返回结果多条
+	}
+
 }
