@@ -11,11 +11,16 @@
         <property name="hibernate.connection.password">123123</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
         
+        <property name="connection.pool_size">10</property>
+        
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">none</property>
         
-        <mapping class="test.hibernate.helloworld.Book" />
+<!-- 		<mapping resource="hibernate/helloworld/Book.hbm.xml" /> -->
+		<mapping class="hibernate.helloworld.Author" />
         
     </session-factory>
+    
 </hibernate-configuration>
+
