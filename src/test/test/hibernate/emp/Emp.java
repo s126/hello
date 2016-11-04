@@ -47,7 +47,6 @@ public class Emp {
 	}
 	public Emp() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	 

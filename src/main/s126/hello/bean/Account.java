@@ -2,6 +2,7 @@ package s126.hello.bean;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -144,5 +145,28 @@ public class Account {
 
 	public void setSex(Integer sex) {
 		this.sex = sex;
+	}
+
+
+
+	public Account( String username, String password,
+			Integer acctype, Date lastLogin, Date birthday, String email,
+			String phone, Integer sex) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.acctype = acctype;
+		this.lastLogin = lastLogin;
+		this.birthday = birthday;
+		this.email = email;
+		this.phone = phone;
+		this.sex = sex;
+	}
+
+
+
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 }

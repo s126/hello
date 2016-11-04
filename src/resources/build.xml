@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+ <project name="" basedir="." default="">
+ <property name="source.root" value="src"/>
+ <property name="class.root" value="classes"/>
+ <property name="lib.dir" value="lib"></property>
+ <property name="schema.dir" value="schema"></property> 
+  
+  <path id="project.path">
+   <pathelement location="${class.root}"/>
+    <fileset dir="WebRoot/WEB-INF/lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+ <target name="prepare" description="Set up bulid structures">
+  <delete dir="${class.root}"></delete>
+    <mkdir dir="${class.root}"/>
+  <copy todir="${class.root}">
+  <fileset dir="${source.root}">
+   <include name="**/*.hbm.xml"/>
+  </fileset>
+  </copy>
+  
+ </target>
+ <target name="compile" depends="hbm2java">
+ <javac srcdir="src/com/hollycrm/testframework/bean"
+        destdir="${class.root}"
+        debug="on"
+        optimize="off"
+        deprecation="on">   
+ <classpath refid="project.path"/>
+</javac>
+ </target>
+ 
+
+    <target name="hbm2java" depends="prepare">
+      <taskdef name="hbm2java" classname="net.sf.hibernate.tool.hbm2java.Hbm2JavaTask" classpathref="project.path"/>
+
+//net.sf.hibernate.tool.hbm2java.Hbm2JavaTask类必须在项目lib下.
+      <hbm2java config="hibernate.codegen.xml" output="${source.root}">
+
+<!--hibernate.codegen.xml是一个辅助用的xml内容是
+
+<codegen>
+  <generate renderer="net.sf.hibernate.tool.hbm2java.BasicRenderer"/>
+</codegen> 
+-->
+        <fileset dir="${source.root}">
+          <include name="**/*.hbm.xml"/>   
+        </fileset>
+      </hbm2java>
+    </target>
+     
+  <target name="hbm2ddl" depends="compile" description="Create SQL by *.hbm.xml">
+        <taskdef name="hbm2ddlexport" 
+   classname="net.sf.hibernate.tool.hbm2ddl.SchemaExportTask" 
+   classpathref="project.path"/>
+   <hbm2ddlexport properties="hibernate.properties"
+     quiet="no" drop="no" text="yes" output="hibernate.sql" delimiter=";">
+
+/**
+
+hibernate.properties中设置生成何种数据库SQL比如生成MySQL脚本DDL则:
+
+hibernate.dialect=net.sf.hibernate.dialect.MySQLDialect
+hibernate.connection.dirver_class=org.gjt.mm.mysql.Driver
+hibernate.connection.url=jdbc:mysql://localhost:3306/mytest
+hibernate.connection.username=root
+hibernate.connection.password=jordan
+hibernate.show_sql=true
+
+其他数据库以此类推
+
+*/
+     <fileset dir ="${class.root}">
+     <include name="**/*.hbm.xml"/>
+     </fileset>  
+      </hbm2ddlexport>  
+  </target> 
+  
+</project>

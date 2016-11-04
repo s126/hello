@@ -26,8 +26,7 @@
 
 
 	<mapping resource="s126/hello/bean/Account.hbm.xml" />
-<!-- 	<mapping resource="s126/hello/bean/Emp.hbm.xml" /> -->
-	<!--  	<mapping resource="test/hibernate/emp/Emp.hbm.xml" /> -->
+	<mapping resource="s126/hello/bean/Emp.hbm.xml" />
 
 </session-factory>
 

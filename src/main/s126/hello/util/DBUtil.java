@@ -87,7 +87,7 @@ public class DBUtil {
 	 * @param
 	 * @return 返回SessionFactory对象或者null
 	 * */
-	public static SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory;
 	private static Configuration configuration ;
 	private static Session session;
 	private static Logger log = Logger.getLogger(BaseDao.class);
@@ -118,7 +118,7 @@ public class DBUtil {
 //			log.info(e);
 			e.printStackTrace();
 			return null;
-		}	
+		}
 		return session;
 	}
 	

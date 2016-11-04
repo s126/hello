@@ -12,6 +12,7 @@ import java.util.Map;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -73,9 +74,15 @@ public class LoginDao extends BaseDao {
 		String sql = "from Account where username=? and password=?";
 		sessionFactory = DBUtil.getSessionFactory();
 		session = sessionFactory.openSession();
+		//
+		session.get(Account.class, 1);
+		session.load(Account.class, 1);
+		//
+		
+		Transaction beginTransaction = session.beginTransaction();
 		query = session.createQuery(sql);
-		 query.setString(0, username);
-		 query.setString(1, password);
+		query.setString(0, username);
+		query.setString(1, password);
 		List ls = query.list();
 		session.close();
 		sessionFactory.close();

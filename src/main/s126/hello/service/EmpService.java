@@ -10,13 +10,12 @@ public class EmpService {
 	private EmpDao empDao = new EmpDao();
 	
 	public List<Emp> getAll() {
-		String sql = "select empno, ename, job, sal from Emp";
-		return empDao.query(Emp.class, sql);
+		return empDao.getAll();
 	}
 	
 	public List<Emp> getSome(String input) {
 		String cond = "%" + input + "%";
-		String sql = "select empno, ename, job, sal from Emp where upper(ename) like upper(?) or upper(job) like upper(?)";
+		String sql = "Emp where upper(ename) like upper(?) or upper(job) like upper(?)";
 		return empDao.query(Emp.class, sql, cond, cond);
 	}
 
