@@ -1,6 +1,8 @@
 package hibernate.helloworld;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,9 @@ public class Author {
 
 	@Transient
 	private int age;
+	
+	@Transient
+	private List<Book> booklist = new ArrayList<Book>();
 	
 	public int getAid() {
 		return aid;
@@ -57,6 +62,12 @@ public class Author {
 	public String toString() {
 		return "Author [aid=" + aid + ", name=" + name + ", birth=" + birth
 				+ "]";
+	}
+	public List<Book> getBooklist() {
+		return booklist;
+	}
+	public void setBooklist(List<Book> booklist) {
+		this.booklist = booklist;
 	}
 
 }

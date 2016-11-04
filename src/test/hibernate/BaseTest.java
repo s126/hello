@@ -11,8 +11,8 @@ import org.junit.BeforeClass;
 
 public class BaseTest {
 
-	private static SessionFactory sessionFactory = null;
-	private static Transaction transaction = null;
+	public static SessionFactory sessionFactory = null;
+	public static Transaction transaction = null;
 	public static Session session = null;
 
 	@BeforeClass
@@ -34,6 +34,8 @@ public class BaseTest {
 	@AfterClass
 	public static void clean() {
 		// 一定不要忘掉资源的关闭等
+		// 1. flush
+		// 2. commit
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
