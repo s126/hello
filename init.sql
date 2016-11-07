@@ -28,10 +28,11 @@ create table vip.account(
 
 
 
-insert into vip.account values ('aaa', 'aaa', 1, null, 1);
-insert into vip.account values ('bbb', 'bbb', 2, null, 1);
-insert into vip.account values ('ccc', 'ccc', 2, null, 1);
-insert into vip.account values ('ddd', 'ddd', 3, null, 1);
+insert into vip.account (accid, username, password, acctype, sex) values (997, 'aaa', 'aaa', 1, 1);
+insert into vip.account (accid, username, password, acctype, sex) values (998, 'bbb', 'bbb', 2, 1);
+insert into vip.account (accid, username, password, acctype, sex) values (999, 'ccc', 'ccc', 3, 2);
+insert into vip.account (accid, username, password, acctype, sex) values (996, 'ddd', 'ddd', 4, 2);
+
 commit;
 
 

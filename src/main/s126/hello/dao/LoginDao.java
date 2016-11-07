@@ -1,7 +1,6 @@
 package s126.hello.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,8 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import s126.hello.bean.Account;
 import s126.hello.util.DBUtil;
+import s126.hello.util.HibernateUtil;
 
 
 public class LoginDao extends BaseDao {
@@ -19,12 +22,29 @@ public class LoginDao extends BaseDao {
 	 * 增加一个新的账号.
 	 */
 	public boolean addAccount(Account account) {
-		String sql = "insert into account (username, password, acctype, birthday, email, phone, sex) values (?, ?, ? , ? , ? , ?, ? )";
-		return execute(sql,
-				account.getUsername(), account.getPassword(),
-				account.getAcctype() == 0 ? 1 : account.getAcctype(),
-				new Date(account.getBirthday().getTime()),
-				account.getEmail(), account.getPhone(), account.getSex());
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			// 获取 session， 开启事务
+			// 放在最前面
+			session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+			
+			// 执行保存
+			session.save(account); 
+			
+			// 事务的提交
+			transaction.commit();
+			
+			return true;
+		} catch (Exception e) {
+			transaction.rollback();
+			e.printStackTrace();
+			return false;
+		}finally{
+			session.close();
+		}
+		
 	}
 
 	
@@ -57,12 +77,14 @@ public class LoginDao extends BaseDao {
 	 * @param username
 	 * @param password
 	 */
-	public Account checkLogin(String username, String password) {
-		String sql = "select username, acctype, lastlogin from account where username=? and password=?";
-		List<Account> accs = query(Account.class, sql, username, password);
-		if(accs.size() > 0)
-			return accs.get(0);
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Account> checkLogin(String username, String password) {
+		
+		Session session = HibernateUtil.getSession();
+		List<Account> acclist = session.createQuery("from Account where username=? and password=?").setString(0, username).setString(1, password).list();
+		session.close();
+		
+		return acclist;
 	}
 
 

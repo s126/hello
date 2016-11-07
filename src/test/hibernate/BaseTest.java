@@ -17,7 +17,7 @@ public class BaseTest {
 
 	@BeforeClass
 	public static void init() {
-		Configuration config = new Configuration().configure("/hibernate/helloworld/hello.cfg.xml");
+		Configuration config = new Configuration().configure("/hibernate/helloworld/helloworld.cfg.xml");
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 		
 		sessionFactory = config.buildSessionFactory(serviceRegistry);

@@ -15,9 +15,9 @@
         
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">none</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         
-<!-- 		<mapping resource="hibernate/helloworld/Book.hbm.xml" /> -->
+		<mapping resource="hibernate/helloworld/Book.hbm.xml" />
 		<mapping class="hibernate.helloworld.Author" />
         
     </session-factory>

@@ -2,8 +2,18 @@ package s126.hello.bean;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+
+@Entity
 public class Account {
 
+	@Id
+	@GeneratedValue
+	private int accid;
+	
 	private String username;
 	private String password;
 	private int acctype; // 1, 学生； 2, 老师； 3, 校长
@@ -13,6 +23,11 @@ public class Account {
 	private String phone;
 	private int sex;
 
+	
+	
+	
+	
+	
 	public String getUsername() {
 		return username;
 	}
@@ -75,6 +90,14 @@ public class Account {
 
 	public void setSex(int sex) {
 		this.sex = sex;
+	}
+
+	public int getAccid() {
+		return accid;
+	}
+
+	public void setAccid(int accid) {
+		this.accid = accid;
 	}
 
 }

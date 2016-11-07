@@ -1,5 +1,7 @@
 package s126.hello.service;
 
+import java.util.List;
+
 import s126.hello.bean.Account;
 import s126.hello.dao.LoginDao;
 
@@ -12,7 +14,8 @@ public class LoginService {
 	}
 
 	public Account checkLogin(String username, String password) {
-		return loginDao.checkLogin(username, password);
+		List<Account> acclist = loginDao.checkLogin(username, password);
+		return acclist.size() > 0 ? acclist.get(0) : null;
 	}
 
 	public Object getAccTypes() {
