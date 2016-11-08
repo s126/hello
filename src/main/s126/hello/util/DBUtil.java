@@ -89,6 +89,7 @@ public class DBUtil {
 	 * */
 	private static SessionFactory sessionFactory;
 	private static Configuration configuration ;
+	//TODO 这里还没写完，没有考虑并发，session属性不应为static
 	private static Session session;
 	private static Logger log = Logger.getLogger(BaseDao.class);
 	@SuppressWarnings("deprecation")

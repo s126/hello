@@ -41,7 +41,7 @@ public class EmpAction extends ActionSupport {
 
 	/* 删除员工 */
 	public String delete() {
-		return empService.delete(emp.getEmpno()) ? "delete" : "error";
+		return empService.deleteEmp(emp.getEmpno()) ? "delete" : "error";
 	}
 
 	/* 更新员工信息 */
@@ -60,7 +60,7 @@ public class EmpAction extends ActionSupport {
 	/* 增加员工 */
 	public String addSubmit() throws Exception {
 		boolean bl = false;
-		bl = empService.add(emp);
+		bl = empService.addEmp(emp);
 
 		if (bl) {
 			msg = "添加成功";
