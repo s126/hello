@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+
 import s126.hello.util.DBUtil;
+import s126.hello.util.HibernateUtil;
 
 public class EmpDao extends BaseDao {
 	Connection conn;
@@ -29,6 +33,7 @@ public class EmpDao extends BaseDao {
 			e.printStackTrace();
 		}
 		return list;
+	  
 	}
-
+	
 }

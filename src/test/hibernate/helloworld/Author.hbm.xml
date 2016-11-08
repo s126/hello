@@ -5,13 +5,12 @@
      
 <hibernate-mapping>
 	<class name="hibernate.helloworld.Author" table="author">
-		<id name="bookno">
+		<id name="aid">
 			<generator class="native"></generator>
 		</id>
 		
 		<property name="name" column="name" length="22"></property>
-		<property name="price"></property>
-		<many-to-one name="author" column="author" class="hibernate.helloworld.Author" ></many-to-one>
+		<property name="birth"></property>
 		
 	</class>
 </hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+     
+<hibernate-mapping package="hibernate.assoc.many2one">
+	<class name="Author" table="author">
+		<id name="aid">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="name" column="name" length="22"></property>
+		<property name="birth"></property>
+		
+	</class>
+	
+	
+	<class name="Book" table="book">
+		<id name="bookno">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="name" column="name" length="99"></property>
+		<property name="price"></property>
+		
+		<!-- many-to-one，这个标签的作用是为所在的列，添加一个外键约束 -->
+		<!-- 首先，跟 property 的含义一样，创建一个对应于 author 属性的字段，字段名字可以由 column 来指定 -->
+		<!-- 其次，在这个字段上，添加一个外键约束， 
+			alter table book 
+	        add constraint FK_rai096pq6coakhlef212hpi3d 
+	        foreign key (author) references author
+		-->
+		<many-to-one name="author" fetch="join" class="Author" lazy="proxy">
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

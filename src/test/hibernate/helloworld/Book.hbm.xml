@@ -2,16 +2,18 @@
 <!DOCTYPE hibernate-mapping PUBLIC 
     "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-     
+
 <hibernate-mapping>
-	<class name="hibernate.helloworld.Book" table="t_book">
+	<class name="hibernate.helloworld.Book" table="t_book" mutable="true">
 		<id name="bookno">
 			<generator class="native"></generator>
 		</id>
-		
+
 		<property name="name" column="name" length="22"></property>
 		<property name="price"></property>
-		<many-to-one name="author" column="author" class="hibernate.helloworld.Author"  cascade="save-update" lazy="false" fetch="select"></many-to-one>
-		
+		<many-to-one name="author" column="aid" fetch="join"
+			not-null="true" class="hibernate.helloworld.Author" cascade="save-update"
+			lazy="false"></many-to-one>
+
 	</class>
 </hibernate-mapping>

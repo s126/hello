@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -15,9 +16,11 @@ public class BaseTest {
 	public static Transaction transaction = null;
 	public static Session session = null;
 
+	public static Configuration config = new Configuration().configure("/hibernate/assoc/many2one/many2one.cfg.xml");;
+	
 	@BeforeClass
 	public static void init() {
-		Configuration config = new Configuration().configure("/hibernate/helloworld/helloworld.cfg.xml");
+		
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
 		
 		sessionFactory = config.buildSessionFactory(serviceRegistry);
@@ -39,6 +42,15 @@ public class BaseTest {
 		transaction.commit();
 		session.close();
 		sessionFactory.close();
+	}
+	
+	
+	/**
+	 * 打印 hibernate 生成表的 ddl 语句。
+	 */
+	public static void printddl() {
+		SchemaExport schemaExport = new SchemaExport(config);
+		schemaExport.create(true, false);
 	}
 
 }

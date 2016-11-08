@@ -1,8 +1,7 @@
-package hibernate.helloworld;
+package hibernate.assoc.many2one;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +12,13 @@ import s126.hello.util.CommonUtil;
 @Entity
 public class Author {
 	
-	
+	@Id
+	@GeneratedValue
 	private int aid;
 	private String name;
 	private Date birth;
+	
+	@Transient
 	private int age;
 	
 	public int getAid() {

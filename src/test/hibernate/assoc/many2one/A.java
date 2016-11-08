@@ -1,25 +1,55 @@
-package hibernate.helloworld;
+package hibernate.assoc.many2one;
 
 import hibernate.BaseTest;
 
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.junit.Test;
 
 
-public class B extends BaseTest {
+public class A extends BaseTest {
 	
 	@Test
 	public void testEntity() {
 		Author author = new Author();
-		author.setName("huangdongying");
+		author.setName("艾莉森");
 		author.setBirth(new Date());
 		
-		Book oracle = new Book("Oracle", 99.0f);
+		//session.save(author);
+
+		Book oracle = new Book("Oracle11g专家教程", 998f);
 		oracle.setAuthor(author);
-		
 		session.save(oracle);
+	}
+	
+	@Test
+	public void lazy(){
+		Book book = (Book) session.get(Book.class, 8);
+//		session.load(Book.class, 6);
+		//System.out.println(book.getName());
+		transaction.commit();
+		session.close();
+		System.out.println(book.getAuthor().getName());
+		
+	}
+	
+	@Test
+	public void testMany2OneLazy () {
+		Book book1 = (Book) session.get(Book.class, 2);
+		// lazy, need.
+		System.out.println(book1.getAuthor().getAge());
+		
+	}
+	
+	@Test
+	public void testMany2OneEager () {
+//		testOneMany();
+		
+		Book book = (Book) session.get(Book.class, 2);
+//		Hibernate.initialize(book.getAuthor());
+		System.out.println(book.getAuthor().getAge());
 	}
 	
 	@Test
@@ -55,9 +85,7 @@ public class B extends BaseTest {
 	
 	
 	
-	
-	
-	
+
 	
 	
 	
@@ -81,4 +109,17 @@ public class B extends BaseTest {
 		session.save(struts);
 		
 	}
+	
+	public static void main(String[] args) {
+		printddl();
+	}
+	
+	
 }
+
+
+
+
+
+
+
