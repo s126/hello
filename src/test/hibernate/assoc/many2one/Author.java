@@ -58,6 +58,11 @@ public class Author {
 	}
 	
 	
+	public void sayHello() {
+		System.out.println("hello, s126");
+	}
+	
+	
 
 
 }

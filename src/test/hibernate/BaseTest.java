@@ -16,7 +16,7 @@ public class BaseTest {
 	public static Transaction transaction = null;
 	public static Session session = null;
 
-	public static Configuration config = new Configuration().configure("/hibernate/assoc/many2one/many2one.cfg.xml");;
+	public static Configuration config = new Configuration().configure("/hibernate/assoc/one2many/one2many.cfg.xml");;
 	
 	@BeforeClass
 	public static void init() {

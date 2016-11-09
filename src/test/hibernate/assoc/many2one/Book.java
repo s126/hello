@@ -73,10 +73,4 @@ public class Book {
 		this.author = author;
 	}
 
-	@Override
-	public String toString() {
-		return "Book [bookno=" + bookno + ", name=" + name + ", price=" + price
-				+ ", author=" + author + "]";
-	}
-
 }
