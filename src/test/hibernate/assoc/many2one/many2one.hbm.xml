@@ -30,7 +30,7 @@
 	        add constraint FK_rai096pq6coakhlef212hpi3d 
 	        foreign key (author) references author
 		-->
-		<many-to-one name="author" class="Author" lazy="no-proxy"></many-to-one>
+		<many-to-one name="author" class="Author" lazy="proxy"></many-to-one>
 
 	</class>
 </hibernate-mapping>

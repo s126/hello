@@ -70,7 +70,7 @@ public class A extends BaseTest {
 	}
 	
 	public static void main(String[] args) {
-		new A().printddl();
+		printddl();
 	}
 	
 	
