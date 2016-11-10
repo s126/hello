@@ -22,6 +22,7 @@ public class B extends BaseTest {
 		session.save(oracle);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test2(){
 		Author author = new Author();

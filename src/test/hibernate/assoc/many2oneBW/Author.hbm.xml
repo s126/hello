@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+     
+<hibernate-mapping package="hibernate.assoc.many2oneBW">
+	<class name="Author" table="author">
+		<id name="aid">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="name" column="name" length="22"></property>
+		<property name="birth" column="birth"></property>
+		
+		
+		<!-- 通过设置 inverse=true，使得 hibernate 只根据一边的设置去维护双边的关系，从而减少冗余数据的产生。 -->
+		<set name="books" inverse="true" >
+			<key column="authorid"></key>
+			<one-to-many class="Book" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

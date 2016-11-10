@@ -17,7 +17,7 @@ public class A extends BaseTest {
 		
 		// 如果不设置 cascade 的话，那么需要在保存下面的 oracle 之前，手动对 author 对象进行持久化操作。
 		// 如果设置了 cascade，那么，这一步就没有必要了。
-		// session.save(author);
+		session.save(author);
 
 		Book oracle = new Book("Oracle11g专家教程", 998f);
 		oracle.setAuthor(author);

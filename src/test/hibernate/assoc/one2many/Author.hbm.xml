@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+     
+<hibernate-mapping package="hibernate.assoc.one2many">
+	<class name="Author" table="author">
+		<id name="aid">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="name" column="name" length="22"></property>
+		<property name="birth" column="birth"></property>
+		
+		<set name="books" lazy="false" fetch="subselect">
+			<key column="authorid"></key>
+			<one-to-many class="Book" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

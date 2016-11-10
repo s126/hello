@@ -35,6 +35,8 @@ repositories {
 dependencies {
 
   def strutsVersion = "2.3.30"
+  
+  
 
   testCompile (
     "junit:junit:4.12"
