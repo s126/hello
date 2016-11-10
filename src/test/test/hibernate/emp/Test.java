@@ -1,5 +1,7 @@
 package test.hibernate.emp;
 
+import hibernate.helloworld.Book;
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,7 +12,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import test.hibernate.helloworld.Book;
 
 
 public class Test {

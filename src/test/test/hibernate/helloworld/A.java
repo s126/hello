@@ -1,5 +1,7 @@
 package test.hibernate.helloworld;
 
+import hibernate.helloworld.Book;
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -43,7 +45,7 @@ public class A {
 
 		// 简单的插入
 		Transaction transaction = session.beginTransaction();
-		session.save(new Book("Java", 8888));
+		session.save(new Book("Java", 8888f));
 		
 		System.out.println("------------------------");
 		

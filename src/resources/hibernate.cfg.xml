@@ -25,8 +25,11 @@
 <!-- 	<property name="dialect">org.hibernate.dialect.DB2Dialect</property> -->
 
 
-	<mapping resource="s126/hello/bean/Account.hbm.xml" />
-	<mapping resource="s126/hello/bean/Emp.hbm.xml" />
+<!-- 	<mapping resource="s126/hello/bean/Account.hbm.xml" /> -->
+<!-- 	<mapping resource="s126/hello/bean/Emp.hbm.xml" /> -->
+	
+	<mapping resource="hibernate/guanlian/Author.hbm.xml" />
+	<mapping resource="hibernate/guanlian/Book.hbm.xml" />
 
 </session-factory>
 

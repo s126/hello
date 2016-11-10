@@ -16,6 +16,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.jboss.logging.Logger;
 import org.junit.Test;
 
@@ -88,7 +89,7 @@ public class DBUtil {
 	 * @return 返回SessionFactory对象或者null
 	 * */
 	private static SessionFactory sessionFactory;
-	private static Configuration configuration ;
+	private static Configuration configuration = new Configuration().configure();
 	//TODO 这里还没写完，没有考虑并发，session属性不应为static
 	private static Session session;
 	private static Logger log = Logger.getLogger(BaseDao.class);
@@ -138,6 +139,12 @@ public class DBUtil {
 			return null;
 		}	
 		return session;
+	}
+	
+	/**控制台输出数据库构造语句*/
+	public static void printddl(){
+		SchemaExport schemaExport = new SchemaExport(configuration);
+		schemaExport.create(true, false);
 	}
 	
 	@Test
