@@ -12,7 +12,7 @@
 		<property name="name" column="name" length="22"></property>
 		<property name="birth" column="birth"></property>
 		
-		<set name="books" lazy="false" fetch="subselect">
+		<set name="books" fetch="subselect">
 			<key column="authorid"></key>
 			<one-to-many class="Book" />
 		</set>

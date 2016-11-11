@@ -4,11 +4,6 @@ import hibernate.BaseTest;
 
 import java.util.Date;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import org.junit.Test;
 
 

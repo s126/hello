@@ -8,12 +8,15 @@ import org.apache.struts2.util.StrutsTypeConverter;
 
 import com.opensymphony.xwork2.conversion.impl.DefaultTypeConverter;
 
+
+
+@SuppressWarnings("rawtypes")
 public class MyConverter extends DefaultTypeConverter {
 	@Override
 	public Object convertValue(Map<String, Object> context, Object value,
 			Class toType) {
-		//return super.convertValue(context, value, toType);
-		
+		// return super.convertValue(context, value, toType);
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			if (toType == Date.class) { // 当字符串向Date类型转换时
@@ -27,11 +30,11 @@ public class MyConverter extends DefaultTypeConverter {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 }
 
-
+@SuppressWarnings("rawtypes")
 class DemoConv extends StrutsTypeConverter {
 
 	@Override
@@ -43,8 +46,5 @@ class DemoConv extends StrutsTypeConverter {
 	public String convertToString(Map context, Object o) {
 		return null;
 	}
-	
+
 }
-
-
-
