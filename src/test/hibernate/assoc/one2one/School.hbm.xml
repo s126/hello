@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-11 15:25:48 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="hibernate.assoc.one2one.School" table="SCHOOL">
+        <id name="sid" type="int">
+            <column name="SID" />
+            <generator class="foreign">
+            	<param name="property">master</param>
+            </generator>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="addr" type="java.lang.String">
+            <column name="ADDR" />
+        </property>
+        
+        <one-to-one name="master" class="hibernate.assoc.one2one.Master" constrained="true"></one-to-one>
+        
+    </class>
+</hibernate-mapping>
