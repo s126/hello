@@ -77,6 +77,11 @@
       </result>
     </action>
     
+    <action name="logout" class="s126.hello.action.LoginAction" method="logout">
+    </action>
+    <action name="exit" class="s126.hello.action.LoginAction" method="exit">
+    </action>
+    
   </package>
 
 

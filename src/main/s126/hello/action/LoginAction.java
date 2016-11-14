@@ -32,7 +32,23 @@ public class LoginAction extends ActionSupport {
 	private LoginService loginService = new LoginService();
 
 	private List<String> reslist = new ArrayList<String>();
-
+	
+	public String exit() {
+		LoginService.logout();
+		return null;
+	}
+	
+	
+	/**
+	 * 注销
+	 */
+	public String logout () {
+		LoginService.logout();
+		
+		return "index";
+	}
+	
+	
 	/**
 	 * 原生方法
 	 */

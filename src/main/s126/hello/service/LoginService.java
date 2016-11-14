@@ -2,6 +2,8 @@ package s126.hello.service;
 
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import s126.hello.bean.Account;
 import s126.hello.dao.LoginDao;
 
@@ -24,6 +26,10 @@ public class LoginService {
 
 	public boolean addAccount(Account account) {
 		return loginDao.addAccount(account);
+	}
+
+	public static void logout() {
+		ServletActionContext.getRequest().getSession().invalidate();
 	}
 }
 

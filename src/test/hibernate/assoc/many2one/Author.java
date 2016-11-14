@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import s126.hello.util.CommonUtil;
@@ -16,6 +18,8 @@ public class Author {
 	@GeneratedValue
 	private int aid;
 	private String name;
+	
+	@Temporal(TemporalType.DATE)
 	private Date birth;
 	
 	@Transient
