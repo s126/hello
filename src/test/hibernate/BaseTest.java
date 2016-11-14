@@ -16,7 +16,7 @@ public class BaseTest {
 	public static Transaction transaction = null;
 	public static Session session = null;
 
-	public static Configuration config = new Configuration().configure("hibernate/assoc/one2one/hibernate.cfg.xml");;
+	public static Configuration config = new Configuration().configure("hibernate/assoc/component/hibernate.cfg.xml");;
 	
 	@BeforeClass
 	public static void init() {

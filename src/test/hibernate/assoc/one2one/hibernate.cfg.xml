@@ -14,11 +14,10 @@
         <property name="connection.pool_size">10</property>
         
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
         
-		<mapping resource="hibernate/assoc/one2one/Master.hbm.xml" /> 
-		<mapping resource="hibernate/assoc/one2one/School.hbm.xml" /> 
+		<mapping resource="hibernate/assoc/one2one/MS_FK.hbm.xml" />
 <!-- 		<mapping class="hibernate.assoc.one2one.Idcard"/> -->
 <!-- 		<mapping class="hibernate.assoc.one2one.Person"/> -->
      </session-factory>
